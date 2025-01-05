@@ -97,3 +97,43 @@ input:hover{
     color: red;
     font-family: 'Roboto', sans-serif;
 }
+
+.title{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.game{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.publisher{
+    margin: 10px;
+    font-size: 18px;
+}
+
+.price{
+    margin: 10px;
+}
+
+.total{
+    display: flex;
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.total div{
+    width: 100%;
+}
+
+.sum{
+    display: flex;
+    justify-content: right;
+}
+
+.message div{
+    margin-bottom: 30px;
+    font-weight: 600;
+}

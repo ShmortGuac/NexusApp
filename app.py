@@ -170,12 +170,16 @@ def page(slug):
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM GAMESTORE where gameid = {slug}")
             row = cursor.fetchone()
-
             if row is not None:
                 # Convert the row to a dictionary
                 columns = [col[0] for col in cursor.description]  # Extract column names
                 game_data = dict(zip(columns, row))  # Combine column names and row values
-                return render_template("game-page.html", picture_link=picture_link, gamedata=game_data, ceil = math.ceil)
+                cursor.execute(f"SELECT GAMEID FROM PURCHASES WHERE USERID = {userid}")
+                result = cursor.fetchall()
+                ownedGames = [i[0] for i in result]
+                print(ownedGames)
+                return render_template("game-page.html", picture_link=picture_link,
+                                       gamedata=game_data, ceil = math.ceil, ownedGames=ownedGames)
             else:
                 return "404 Not Found"
 
@@ -183,7 +187,6 @@ def page(slug):
 def purchase(game):
     if request.method == 'GET':
         if 'user_id' in session:
-            userid = session.get("user_id")
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM GAMESTORE where gameid = {game}")
             row = cursor.fetchone()
@@ -196,7 +199,16 @@ def purchase(game):
                 return "404 Not Found"
         else:
             return "Invalid Session please log in"
-
+        
+@app.route("/transaction/<game>", methods=['POST'])
+def transaction(game):
+    if 'user_id' in session:
+        userid = session.get("user_id")
+        gameid = game
+        cursor = conn.cursor()
+        cursor.callproc("insert_purchases", [userid, gameid])
+        cursor.callproc("add_userlibrary", [userid, gameid])
+        return render_template("transaction.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

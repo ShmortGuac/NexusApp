@@ -7,23 +7,25 @@
 
 <body>
 <div class="container">
-<p><b>Confirm Transaction</b></p>
+<p><b>Transaction Details</b></p>
 <div class="login">
     <div class = "input">
-        <form action="/register" method="POST">
-            <label for="username">{{gamedata['GAMENAME']}}</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-      
-            <label for="confirmPass">Confirm Password</label>
-            <input type="password" id="confirmPass" name="confirmPass" required>
-            <div><button type="submit">Register</button></div>
+        <form action="/transaction/{{gamedata['GAMEID']}}" method="POST">
+            <div>
+                <div class = "title">Product Details</div>
+                <hr>
+                <div class = "game">{{gamedata['GAMENAME']}}</div>
+                <div class = "publisher">{{gamedata['PUBLISHERNAME']}}</div>
+                <div class = "price">RM {{gamedata['PRICE']}}</div>
+                <hr>
+                <div class = "total">
+                    <div class = "text">TOTAL</div>
+                    <div class = "sum">RM {{gamedata['PRICE']}}</div>
+                </div>
+            </div>
+            <div><button type="submit">Purchase</button></div>
         </form>
+        <p>Return to <a href="\home">Home Page</a></p>
     </div>
 </div>
 </div>

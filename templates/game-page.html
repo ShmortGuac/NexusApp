@@ -66,6 +66,7 @@
                 <div class = "publisher">
                     Publisher : {{gamedata['PUBLISHERNAME']}}
                 </div>
+                {%if gamedata['GAMEID'] not in ownedGames%}
                 <div class = "purchase-button">
                     {% if gamedata['PRICE'] == 0%}
                         <button type="button"><a href="/purchase/{{gamedata['GAMEID']}}">GET GAME</a></button>
@@ -75,6 +76,11 @@
                         <span> RM {{ '{:.2f}'.format(gamedata['PRICE']) }}</span>
                     {% endif %}
                 </div>
+                {% else %}
+                <div class="purchase-button">
+                <p>YOU ALREADY OWN THIS GAME</p>
+                </div>
+                {% endif %}
             </div>
        </div>
    </div>
