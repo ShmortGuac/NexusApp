@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+<div class="container">
+<p><b>Edit Profile</b></p>
+<div class="login">
+    <div class = "input">
+        <form action="/edit" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages and messages[0][0] == 'error' %}
+            <p style="color: red;">{{messages[0][1]}}</p><br>
+            {% endif %}
+            {% endwith %}
+            <div><button type="submit" style="background-color: #4CAF50; color: white">Save Changes</button></div>
+        </form>
+        <form action="/profile" method="get">
+            <div><button type="submit" style="background-color: #c23b22; color: white">Cancel</button></div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

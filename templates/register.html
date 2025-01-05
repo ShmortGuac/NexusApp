@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+<div class="container">
+<p><b>Register</b></p>
+<div class="login">
+    <div class = "input">
+        <form action="/register" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+      
+            <label for="confirmPass">Confirm Password</label>
+            <input type="password" id="confirmPass" name="confirmPass" required>
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages and messages[0][0] == 'error' %}
+            <p style="color: red;">{{messages[0][1]}}</p><br>
+            
+            {% elif messages and messages[0][0] == 'success'%}
+            <p style="color: green;">{{messages[0][1]}}</p><br>
+            {% endif %}
+            {% endwith %}
+            <div><button type="submit">Register</button></div>
+            <p>Already have an account? <a href="\login">Log in here</a></p>
+            <!--CTF{hereisflag}-->
+        </form>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

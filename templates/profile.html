@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <title>Navbar</title>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Logo Section -->
+        <div class="left-side">
+            <div class="logo">
+                <img src="./static/images/Nexus.png" alt="Logo">
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="\home">Home</a></li>
+                <li><a href="\store">Store</a></li>
+                <li><a href="#about">Library</a></li>
+                <li><a href="#contact">Support</a></li>
+            </ul>
+        </div>
+
+        <div class="right-side">
+            <a href="\profile" class="circular-image-link">
+                <img src="{{ picture_link }}" alt="Circular image" class="circular-image">
+            </a>
+        </div>
+
+    </nav>
+
+    <div class="profile-content">
+        <img src="{{ picture_link }}" alt="Circular image" class="profile-image">
+
+        <div class = "username" id="displayName">{{ username }}</div>
+
+        <div class = "profile-body">
+            <div>
+                <p class="tracker">Games Owned</p>
+                <p class="stats">{{ gameCount }}</p>
+            </div>
+            <div>
+                <p class="tracker">Total Hours Played</p>
+                <p class="stats">{{ hoursPlayed }}</p>
+            </div>
+            <div>
+                <p class="tracker">Country</p>
+                <p class="stats">{{ country }}</p>
+            </div>
+            <div>
+                <p class="tracker">Date Joined</p>
+                <p class="stats">{{ dateJoined }}</p>
+            </div>
+        </div>
+
+        <div class="profile-buttons">
+            <form action="/logout" method="get">
+                <button type="submit" class = "logout"> Log Out </button>
+            </form>
+            <form action="/edit" method="get">
+                <button type="submit" class = "edit-profile"> Edit Profile </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

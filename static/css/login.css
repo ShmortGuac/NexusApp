@@ -1,0 +1,99 @@
+body {
+    display: flex;               /* Enable Flexbox */
+    justify-content: center;     /* Center horizontally */
+    align-items: center;         /* Center vertically */
+    height: 90vh;               /* Full viewport height */
+    margin: 0;                   /* Remove default margin */
+    background-color: black;   /* Optional background color */
+}
+
+.container{
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    color: white;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.logo img{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 250px;
+    height: 200px;
+}
+
+
+.login {
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 30;
+    background-color: #101010;   /* Optional styling */
+    color: white;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login button{
+    appearance: none;           /* Remove default styling */
+    border: none;               /* Remove border */
+    background: none;           /* Remove background */
+    box-shadow: none;           /* Remove bevel/shadow */
+    padding: 10px 20px;         /* Add custom padding */
+    width: 300px;
+    background-color: white;  /* Flat green background */
+    color: black;               /* Text color */
+    font-size: 16px;            /* Font size */
+    cursor: pointer;     
+    transition: all 0.3s ease;
+}
+
+.input{
+    width: 100%;
+}
+
+.input label{
+    font-size: 20px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input input{
+    appearance: none;
+    border: none;
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #505050;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.input p{
+    margin-bottom: -10px;
+    font-size: 14px;
+}
+
+.input a{
+    color: #4a96d2;
+}
+
+button:hover{
+    scale: 105%;
+}
+
+button:active{
+    scale: 95%;
+}
+
+input:hover{
+    background-color: #707070;
+}
+
+.error{
+    color: red;
+    font-family: 'Roboto', sans-serif;
+}

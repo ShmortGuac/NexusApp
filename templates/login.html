@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Log In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+</head>
+
+<body>
+<div class="container">
+<p><b>Log In</b></p>
+<div class="login">
+    <div class = "input">
+        <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+       
+            <label for="password">Password</label>
+            <input type="password" id ="password" name="password">
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            <p class = "error">{{ messages[0][1] }}</p>
+        {% endif %}
+        {% endwith %}
+        <p>Don't have an account? <a href="\register">Register here</a></p>
+
+    </div>
+    
+    <div class="logo">
+        <img src="./static/images/Nexus.png" alt="Nexus Logo">
+    </div>
+</div>
+</div>
+</body>
+
+</html>

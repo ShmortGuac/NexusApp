@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+<div class="container">
+<p><b>Confirm Transaction</b></p>
+<div class="login">
+    <div class = "input">
+        <form action="/register" method="POST">
+            <label for="username">{{gamedata['GAMENAME']}}</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+      
+            <label for="confirmPass">Confirm Password</label>
+            <input type="password" id="confirmPass" name="confirmPass" required>
+            <div><button type="submit">Register</button></div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

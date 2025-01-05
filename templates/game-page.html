@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <title>Navbar</title>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Logo Section -->
+        <div class="left-side">
+            <div class="logo">
+                <img src="/static/images/Nexus.png" alt="Logo">
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="\home">Home</a></li>
+                <li><a href="\store">Store</a></li>
+                <li><a href="#about">Library</a></li>
+                <li><a href="#contact">Support</a></li>
+            </ul>
+        </div>
+
+        <div class="right-side">
+            <a href="\profile" class="circular-image-link">
+                <img src="{{ picture_link }}" alt="Circular image" class="circular-image">
+            </a>
+        </div>
+
+    </nav>
+
+    <div class = "page-body">
+       <div class = "page-media">
+            <img src="/static/images/m{{gamedata['GAMEID']}}.jpg" alt="{{gamedata['GAMENAME']}}">
+       </div>
+       <div class = "game-desc">
+            <div class = "game-title">
+                {{gamedata["GAMENAME"]}}
+            </div>
+            <div class = "game-details">
+                <div class = "genre">
+                    Genre : {{gamedata["GENRE"]}}
+                </div>
+                <div class = "rating">
+                    Ratings:
+                    {% for stars in range(gamedata['RATING'] | int)%}
+                    <span class="filled">★</span>
+                    {% endfor%}
+                    {% if gamedata['RATING'] % 1 != 0%}
+                    <span style="color: #FFD700; opacity: 0.5;">★</span>
+                    {% endif %}
+                    {% for stars in range(10 - (ceil(gamedata['RATING']) | int))%}
+                    <span class="empty">★</span>
+                    {% endfor%}
+                    <span class = "rating-num">{{gamedata['RATING']}}</span>
+                </div>
+                <div class = "release-date">
+                    Release Date : {{ gamedata['RELEASEDATE'].strftime('%B %d, %Y') }}
+                </div>
+                <div class = "game-size">
+                    Game Size : {{ gamedata['GAMESIZE'] }}
+                </div>
+                <div class = "publisher">
+                    Publisher : {{gamedata['PUBLISHERNAME']}}
+                </div>
+                <div class = "purchase-button">
+                    {% if gamedata['PRICE'] == 0%}
+                        <button type="button"><a href="/purchase/{{gamedata['GAMEID']}}">GET GAME</a></button>
+                        <span>FREE</span>
+                    {% else %}
+                        <button type="button"><a href="/purchase/{{gamedata['GAMEID']}}">BUY GAME</a></button>
+                        <span> RM {{ '{:.2f}'.format(gamedata['PRICE']) }}</span>
+                    {% endif %}
+                </div>
+            </div>
+       </div>
+   </div>
+    </div>
+
+</body>
+
+</html>
