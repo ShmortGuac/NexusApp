@@ -78,7 +78,7 @@ def home():
 
         featured = random.sample(range(1, 20), 5)
 
-        return render_template("home.html", picture_link=picture_link, featured=featured)
+        return render_template("home.html", picture_link=picture_link, featured=featured, userid = userid)
     else:
         return "No active sessions found. Please log in"
     
@@ -117,7 +117,6 @@ def edit():
         return render_template("edit.html")
     
     userid = session.get("user_id")
-    print(userid)
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"]
@@ -209,6 +208,21 @@ def transaction(game):
         cursor.callproc("insert_purchases", [userid, gameid])
         cursor.callproc("add_userlibrary", [userid, gameid])
         return render_template("transaction.html")
+
+@app.route("/library/<id>", methods = ['GET'])
+def library(id):
+    userid = session.get("user_id")
+    username = session.get("username")
+    img_path = f"static/images/{userid}.jpg"
+    if(os.path.exists(img_path)):
+        picture_link = f"/static/images/{userid}.jpg"
+    else:
+        picture_link = "/static/images/Nexus.png"
+    if(str(userid) == id):
+        return render_template("library.html", picture_link=picture_link, username=username)
+    else:
+        return "Invalid Session"
+
 
 if __name__ == "__main__":
     app.run(debug=True)

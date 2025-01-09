@@ -406,3 +406,12 @@ body {
     text-decoration: none;
     color: inherit;
 }
+
+.library-body{
+    border: 2px solid white;
+    color: white;
+    margin-top: 50px;
+    font-size: 100px;
+    font-family: 'Dosis';
+    text-align: center;
+}
