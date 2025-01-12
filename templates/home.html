@@ -5,7 +5,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <title>Navbar</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <title>Home</title>
 </head>
 <body>
     <nav class="navbar">
@@ -20,7 +21,7 @@
                 <li><a href="\home">Home</a></li>
                 <li><a href="\store">Store</a></li>
                 <li><a href="\library\{{userid}}">Library</a></li>
-                <li><a href="#contact">Support</a></li>
+                <li><a href="\support">Support</a></li>
             </ul>
         </div>
 

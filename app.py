@@ -76,7 +76,7 @@ def home():
         else:
             picture_link = "/static/images/Nexus.png"
 
-        featured = random.sample(range(1, 20), 5)
+        featured = random.sample(range(1, 24), 5)
 
         return render_template("home.html", picture_link=picture_link, featured=featured, userid = userid)
     else:
@@ -107,8 +107,35 @@ def profile():
         if hoursPlayed is None:
             hoursPlayed = 0
 
-        return render_template("profile.html", picture_link=picture_link, username = username,
+        return render_template("profile.html", picture_link=picture_link, username = username, userid=userid,
                                country = country, dateJoined=dateJoined, gameCount=gameCount, hoursPlayed=hoursPlayed)
+
+
+@app.route("/delete", methods=['GET', 'POST'])
+def delete():
+    if request.method == 'GET':
+        if 'user_id' in session:
+            return render_template("delete.html")
+        else:
+            return "Invalid Session"
+        
+    username = request.form['username']
+    password = request.form['password']
+    confirmPass = request.form['confirmPass']
+    if(confirmPass == password):
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT userid FROM users WHERE username = '{username}' AND userpassword = '{password}'")
+        user = cursor.fetchone()
+        if(not user):
+            flash("Credentials do not match", "error")
+            return render_template("delete.html")
+        else:
+            userid = user[0]
+            cursor.execute(f"DELETE FROM USERS WHERE USERID = {userid}")
+            return redirect(url_for("landing"))
+    else:
+        flash("Passwords do not match", "error")
+        return render_template("delete.html")
 
 
 @app.route("/edit", methods = ['GET', 'POST'])
@@ -151,7 +178,7 @@ def store():
                 picture_link = f"/static/images/{userid}.jpg"
             else:
                 picture_link = "/static/images/Nexus.png"
-            return render_template("store.html", picture_link=picture_link, results=results)
+            return render_template("store.html", picture_link=picture_link, results=results, userid = userid)
         else:
             return "No active session found. Please log in"
 
@@ -178,7 +205,7 @@ def page(slug):
                 ownedGames = [i[0] for i in result]
                 print(ownedGames)
                 return render_template("game-page.html", picture_link=picture_link,
-                                       gamedata=game_data, ceil = math.ceil, ownedGames=ownedGames)
+                                       gamedata=game_data, ceil = math.ceil, ownedGames=ownedGames, userid = userid)
             else:
                 return "404 Not Found"
 
@@ -190,9 +217,8 @@ def purchase(game):
             cursor.execute(f"SELECT * FROM GAMESTORE where gameid = {game}")
             row = cursor.fetchone()
             if row is not None:
-                # Convert the row to a dictionary
-                columns = [col[0] for col in cursor.description]  # Extract column names
-                game_data = dict(zip(columns, row))  # Combine column names and row values
+                columns = [col[0] for col in cursor.description]
+                game_data = dict(zip(columns, row)) 
                 return render_template("purchase.html", gamedata=game_data)
             else:
                 return "404 Not Found"
@@ -219,9 +245,23 @@ def library(id):
     else:
         picture_link = "/static/images/Nexus.png"
     if(str(userid) == id):
-        return render_template("library.html", picture_link=picture_link, username=username)
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT gameid, gamename FROM USERGAMELIBRARY where USERID = {userid}")
+        gamedetails = cursor.fetchall()
+        cursor.execute("SELECT gameid, gamename from USERGAMELIBRARY where USERid = 1 AND TRUNC(DATEADDED) = TRUNC(SYSDATE)")
+        recent = cursor.fetchall()
+        if not recent:
+            cursor.execute("SELECT gameid, gamename from USERGAMELIBRARY where USERid = 1 AND DATEADDED = (SELECT MAX(DATEADDED) FROM USERGAMELIBRARY where userid = 1)")
+            recent = cursor.fetchall()
+        return render_template("library.html", picture_link=picture_link, username=username,
+                                gamedetails = gamedetails, recent = recent, userid=userid)
     else:
         return "Invalid Session"
+
+@app.route("/support")
+def support():
+    return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
 
 
 if __name__ == "__main__":

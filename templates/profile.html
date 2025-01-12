@@ -5,7 +5,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <title>Navbar</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <title>{{username}}</title>
 </head>
 <body>
     <nav class="navbar">
@@ -19,8 +20,8 @@
             <ul class="nav-links">
                 <li><a href="\home">Home</a></li>
                 <li><a href="\store">Store</a></li>
-                <li><a href="#about">Library</a></li>
-                <li><a href="#contact">Support</a></li>
+                <li><a href="\library\{{userid}}">Library</a></li>
+                <li><a href="\support">Support</a></li>
             </ul>
         </div>
 
@@ -62,6 +63,9 @@
             </form>
             <form action="/edit" method="get">
                 <button type="submit" class = "edit-profile"> Edit Profile </button>
+            </form>
+            <form action="/delete" method="get">
+                <button type="submit" class = "delete"> DELETE PROFILE </button>
             </form>
         </div>
     </div>

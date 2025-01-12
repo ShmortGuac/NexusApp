@@ -3,9 +3,10 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Jersey+15&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <title>Navbar</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <title>Library</title>
 </head>
 <body>
     <nav class="navbar">
@@ -19,8 +20,8 @@
             <ul class="nav-links">
                 <li><a href="\home">Home</a></li>
                 <li><a href="\store">Store</a></li>
-                <li><a href="#about">Library</a></li>
-                <li><a href="#contact">Support</a></li>
+                <li><a href="\library\{{userid}}">Library</a></li>
+                <li><a href="\support">Support</a></li>
             </ul>
         </div>
 
@@ -31,8 +32,29 @@
         </div>
     </nav>
 
-    <div class = "library-body">
+    <div class = "library-title">
         {{ username }}'s Library
+    </div>
+    <div class = "library-games">
+
+        <div class = "game-list-title">
+            Recently Added
+        </div>
+        <ul class = "game-list">
+            {% for games in recent %}
+            <li><img src="/static/images/m{{games[0]}}.jpg" alt="name"/>{{games[1]}}</li>
+            {% endfor %}
+        </ul>
+
+        <div class = "game-list-title">
+            Your Games
+        </div>
+        <ul class = "game-list">
+            {% for games in gamedetails %}
+            <li><img src="/static/images/m{{games[0]}}.jpg" alt="name"/>{{games[1]}}</li>
+            {% endfor %}
+        </ul>
+
     </div>
 
 

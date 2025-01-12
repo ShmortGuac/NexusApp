@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <title>DELETE!!!</title>
+</head>
+
+<body>
+<div class="container">
+<p><b>DELETE ACCOUNT</b></p>
+<div class="login">
+    <div class = "input">
+        <form action="/delete" method="POST">
+            <div class = "desc">ENTER YOUR DETAILS TO CONFIRM DELETION</div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+      
+            <label for="confirmPass">Confirm Password</label>
+            <input type="password" id="confirmPass" name="confirmPass" required>
+            {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages and messages[0][0] == 'error' %}
+            <p style="color: red;">{{messages[0][1]}}</p><br>
+            
+            {% elif messages and messages[0][0] == 'success'%}
+            <p style="color: green;">{{messages[0][1]}}</p><br>
+            {% endif %}
+            {% endwith %}
+            <div><button class="delete" type="submit">DELETE</button></div>
+            <p>Changed Your Mind? Return to profile <a href="\profile">here</a></p>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

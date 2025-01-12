@@ -179,7 +179,7 @@ body {
 
 .profile-buttons{
     display: flex;
-    width:20%;
+    width:50%;
     justify-content: space-around;
     margin-top: 35px;
 }
@@ -220,6 +220,34 @@ body {
 .edit-profile:hover{
     scale: 105%;
     background-color: #45a049;
+}
+
+.delete{
+    background-color: #c23b22; /* Green background */
+    color: white;             /* White text */
+    padding: 15px 20px;       /* Padding for size */
+    text-align: center;       /* Center text */
+    text-decoration: none;    /* No underline */
+    display: inline-block;    /* Inline button */
+    font-size: 16px;          /* Font size */
+    cursor: pointer;         /* Pointer cursor on hover */
+    border-radius: 5px;       /* Rounded corners */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+    border: none;  
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Add the shake animation on hover */
+.delete:hover {
+    animation: shake 0.3s; /* Apply the shake animation for 0.5 seconds */
+    animation-timing-function: ease-in-out;
 }
 
 .store-title{
@@ -407,11 +435,71 @@ body {
     color: inherit;
 }
 
-.library-body{
-    border: 2px solid white;
+.library-title{
     color: white;
-    margin-top: 50px;
-    font-size: 100px;
+    margin-top: 30px;
+    font-size: 50px;
     font-family: 'Dosis';
     text-align: center;
+}
+
+.library-games{
+    color: white;
+    margin-top: 10px;
+    font-size: 50px;
+    font-family: 'Dosis';
+}
+
+.game-list{
+    display: flex;
+    list-style: none;
+    overflow: auto;
+    margin-bottom: 30px;
+}
+
+.game-list li{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.game-list img{
+    width: 360px;
+    height: 200px;
+    object-fit: cover;
+    margin: 5px
+}
+
+.library-games ::-webkit-scrollbar {
+    width: 12px;
+    height: 10px;
+  }
+  
+.library-games  ::-webkit-scrollbar-track {
+    background: #000000;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+.library-games ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #202020;
+  }
+  
+.library-games ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.game-list-title{
+    font-family: "Roboto Condensed";
+    font-weight: 200;
+    font-size: 35px;
+    width: 100%;
+}
+
+.game-list li:hover{
+    scale: 105%;
 }
