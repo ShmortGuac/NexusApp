@@ -1,10 +1,10 @@
 body {
-    display: flex;               /* Enable Flexbox */
-    justify-content: center;     /* Center horizontally */
-    align-items: center;         /* Center vertically */
-    height: 90vh;               /* Full viewport height */
-    margin: 0;                   /* Remove default margin */
-    background-color: black;   /* Optional background color */
+    display: flex;              
+    justify-content: center;    
+    align-items: center;        
+    height: 90vh;              
+    margin: 0;                  
+    background-color: black;  
 }
 
 .container{
@@ -30,22 +30,22 @@ body {
     width: auto;
     height: auto;
     padding: 30;
-    background-color: #101010;   /* Optional styling */
+    background-color: #101010;  
     color: white;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
 }
 
 .login button:not(.delete){
-    appearance: none;           /* Remove default styling */
-    border: none;               /* Remove border */
-    background: none;           /* Remove background */
-    box-shadow: none;           /* Remove bevel/shadow */
-    padding: 10px 20px;         /* Add custom padding */
+    appearance: none;          
+    border: none;              
+    background: none;          
+    box-shadow: none;          
+    padding: 10px 20px;        
     width: 300px;
-    background-color: white;  /* Flat green background */
-    color: black;               /* Text color */
-    font-size: 16px;            /* Font size */
+    background-color: white; 
+    color: black;              
+    font-size: 16px;           
     cursor: pointer;     
     transition: all 0.3s ease;
 }
@@ -145,15 +145,15 @@ input:hover{
 }
 
 .delete{
-    appearance: none;           /* Remove default styling */
-    border: none;               /* Remove border */
-    background: none;           /* Remove background */
-    box-shadow: none;           /* Remove bevel/shadow */
-    padding: 10px 20px;         /* Add custom padding */
+    appearance: none;          
+    border: none;              
+    background: none;          
+    box-shadow: none;          
+    padding: 10px 20px;        
     width: 100%;
-    background-color:red;  /* Flat green background */
-    color: white;               /* Text color */
-    font-size: 16px;            /* Font size */
+    background-color:red; 
+    color: white;              
+    font-size: 16px;           
     cursor: pointer;     
     transition: all 0.3s ease;
 }
