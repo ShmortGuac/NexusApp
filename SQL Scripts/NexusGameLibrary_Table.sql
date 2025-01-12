@@ -1,0 +1,78 @@
+--Create table PUBLISHER
+
+CREATE TABLE PUBLISHER(
+    PublisherID NUMBER(6) NOT NULL,
+    PublisherName VARCHAR2(30) NOT NULL,
+    PublisherEmail VARCHAR2(30),
+    PublisherWebsite VARCHAR2(64),
+    PublisherPassword VARCHAR2(30) NOT NULL,
+    CONSTRAINT PublisherID_PK PRIMARY KEY (PublisherID)
+);
+
+--Create table GAME
+
+CREATE TABLE GAME(
+    GameID NUMBER(6) NOT NULL,
+    GameName VARCHAR2(30),
+    Genre VARCHAR2(15),
+    ReleaseDate DATE,
+    Price NUMBER(10,2),
+    Rating NUMBER(2,1),
+    GameSize VARCHAR2(10),
+    PublisherID NUMBER(6) NOT NULL,
+    CONSTRAINT GameID_PK PRIMARY KEY (GameID),
+    CONSTRAINT Publisher_Game_FK FOREIGN KEY (PublisherID)
+    REFERENCES PUBLISHER(PublisherID) ON DELETE CASCADE
+);
+
+--Create table USER
+
+CREATE TABLE USERS(
+    UserID NUMBER(6) NOT NULL,
+    Username VARCHAR2(20) NOT NULL,
+    UserPassword VARCHAR2(16) NOT NULL,
+    UserEmail VARCHAR2(30),
+    UserCountry VARCHAR2(20),
+    DateJoined DATE NOT NULL,
+    CONSTRAINT UserID_PK PRIMARY KEY (UserID)
+);
+
+--Create table PURCHASES
+
+CREATE TABLE PURCHASES(
+    PurchaseID NUMBER(6) NOT NULL,
+    UserID NUMBER(6) NOT NULL,
+    GameID NUMBER(6) NOT NULL,
+    PurchaseDate DATE NOT NULL,
+    CONSTRAINT Users_Purchases_FK FOREIGN KEY (UserID)
+    REFERENCES USERS ON DELETE CASCADE,
+    CONSTRAINT Game_Purchases_FK FOREIGN KEY (GameID)
+    REFERENCES GAME ON DELETE CASCADE,
+    CONSTRAINT PurchaseID_PK PRIMARY KEY (PurchaseID)
+);
+
+--Create table USERLIBRARY
+
+CREATE TABLE USERLIBRARY(
+    UserID NUMBER(6) NOT NULL,
+    GameID NUMBER(6) NOT NULL,
+    DateAdded DATE NOT NULL,
+    HoursPlayed NUMBER(8, 1),
+    LastPlayed DATE,
+    CONSTRAINT Users_Library_FK FOREIGN KEY (UserID)
+    REFERENCES USERS ON DELETE CASCADE,
+    CONSTRAINT Game_Library_FK FOREIGN KEY (GameID)
+    REFERENCES GAME ON DELETE CASCADE,
+    CONSTRAINT UserLibrary_PK PRIMARY KEY (UserID, GameID) 
+);
+
+--Create table Store
+
+CREATE TABLE STORE(
+    StoreID NUMBER(6) NOT NULL PRIMARY KEY,
+    RetailPrice NUMBER(6,1) NOT NULL
+);
+
+-- Drop table Store
+
+DROP TABLE STORE;
