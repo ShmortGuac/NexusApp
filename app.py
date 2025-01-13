@@ -10,6 +10,7 @@ app.secret_key = "key"
 
 db.init_oracle_client(r"C:\oracle_instantclient\instantclient_23_6")
 
+
 conn = db.connect(user="NEXUS", password="NEXUS",
                  host="localhost", port=1521, service_name="XE")
 

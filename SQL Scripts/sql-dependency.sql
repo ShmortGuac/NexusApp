@@ -19,7 +19,7 @@ CREATE SEQUENCE increment_purchase
     NOCACHE
     NOCYCLE;
 
-create or replace TRIGGER t_increment
+create or replace TRIGGER purchase_increment
 BEFORE INSERT ON purchases
 FOR EACH ROW
 BEGIN
