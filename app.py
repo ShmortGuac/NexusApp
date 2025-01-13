@@ -17,7 +17,7 @@ conn = db.connect(user="NEXUS", password="NEXUS",
 def landing():
     return render_template("login.html")
 
-@app.route("/login", methods = ['GET', 'POST'])
+@app.route("/login", methods = ['GET', 'POST']) # mankimi
 def login():
 
     if request.method == 'GET':
@@ -40,7 +40,7 @@ def login():
     
 
 
-@app.route("/register", methods = ['GET', 'POST'])
+@app.route("/register", methods = ['GET', 'POST']) # mankimi
 def register():
 
     if request.method == 'GET':
@@ -60,13 +60,13 @@ def register():
         return render_template("register.html")
     
 
-@app.route("/logout")
+@app.route("/logout") # zharfan
 def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route("/home", methods = ['GET'])
+@app.route("/home", methods = ['GET']) # shawn
 def home():
     if request.method == 'GET' and 'user_id' in session:
         userid = session.get("user_id")
@@ -170,7 +170,7 @@ def store():
             img_path = f"static/images/{userid}.jpg"
             query = request.args.get('query', '')
             cursor = conn.cursor()
-            cursor.execute(f"SELECT gameid, gamename from game where LOWER(gamename) like LOWER('%{query}%')")
+            cursor.execute(f"SELECT gameid, gamename from game where LOWER(gamename) like LOWER('%{query}%')") # %%
             results = cursor.fetchall()
             gameid = [game[0] for game in results]
             gamename = [game[1] for game in results]
@@ -248,10 +248,10 @@ def library(id):
         cursor = conn.cursor()
         cursor.execute(f"SELECT gameid, gamename FROM USERGAMELIBRARY where USERID = {userid}")
         gamedetails = cursor.fetchall()
-        cursor.execute("SELECT gameid, gamename from USERGAMELIBRARY where USERid = 1 AND TRUNC(DATEADDED) = TRUNC(SYSDATE)")
+        cursor.execute(f"SELECT gameid, gamename from USERGAMELIBRARY where USERid = {userid} AND TRUNC(DATEADDED) = TRUNC(SYSDATE)")
         recent = cursor.fetchall()
         if not recent:
-            cursor.execute("SELECT gameid, gamename from USERGAMELIBRARY where USERid = 1 AND DATEADDED = (SELECT MAX(DATEADDED) FROM USERGAMELIBRARY where userid = 1)")
+            cursor.execute(f"SELECT gameid, gamename from USERGAMELIBRARY where USERid = 1 AND DATEADDED = (SELECT MAX(DATEADDED) FROM USERGAMELIBRARY where userid = {userid})")
             recent = cursor.fetchall()
         return render_template("library.html", picture_link=picture_link, username=username,
                                 gamedetails = gamedetails, recent = recent, userid=userid)
