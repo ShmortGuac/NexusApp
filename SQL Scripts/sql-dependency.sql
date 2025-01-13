@@ -23,7 +23,7 @@ create or replace TRIGGER purchase_increment
 BEFORE INSERT ON purchases
 FOR EACH ROW
 BEGIN
-    :NEW.purchaseid := auto_increment.NEXTVAL;
+    :NEW.purchaseid := increment_purchase.NEXTVAL;
 END;
 
 --views
@@ -41,10 +41,18 @@ G.PUBLISHERID,
 P.PUBLISHERNAME
 FROM GAME G JOIN PUBLISHER P ON G.PUBLISHERID = P.PUBLISHERID;
 
-CREATE OR REPLACE FORCE VIEW "NEXUS"."USERGAMELIBRARY" ("USERID", "USERNAME", "GAMEID", "GAMENAME", "DATEADDED", "HOURSPLAYED", "LASTPLAYED") AS 
-  SELECT l.userid, u.username, l.gameid, g.gamename, l.dateadded, l.hoursplayed, l.lastplayed
-    FROM userlibrary l JOIN users u ON l.userid = u.userid JOIN game g on l.gameid = g.gameid order by u.userid;
-
+--views
+CREATE OR REPLACE VIEW USERGAMELIBRARY
+AS
+SELECT
+L.USERID,
+U.USERNAME,
+L.GAMEID,
+G.GAMENAME,
+L.DATEADDED,
+L.HOURSPLAYED,
+L.LASTPLAYED
+FROM USERLIBRARY L JOIN USERS U ON L.USERID = U.USERID JOIN GAME G ON L.GAMEID = G.GAMEID ORDER BY U.USERID;
 
 -- procedures
 create or replace PROCEDURE add_userlibrary(
